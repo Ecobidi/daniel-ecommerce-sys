@@ -1,5 +1,6 @@
 let path = require("path");
 let express = require("express");
+require('dotenv').config()
 let mongoose = require("mongoose");
 let expHbs = require("express-handlebars");
 let bodyParser = require("body-parser");
@@ -16,15 +17,27 @@ const { CategoryRouter, CustomerRouter, ProductRouter, OrderRouter, ShopRouter, 
 let { APP_NAME, DB_HOST, DB_NAME, DB_PORT, PORT } = require("./config");
 
 // create db connection
-mongoose.connect(`mongodb://${DB_HOST}:${DB_PORT}/${DB_NAME}`)
 
-mongoose.connection.once("connected", function() {
-  console.log("Connected to database");
-});
+const uri = `mongodb+srv://${process.env.DB_USER}:<${process.env.DB_PASSWORD}>@cluster0.qmunc.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`
 
-mongoose.connection.on('error',function (err) {
-  console.log('Mongoose connection error: ' + err);
-});
+try {
+  mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+  console.log('connected to ' + process.env.DB_NAME + ' database.')
+} catch (error) {
+  console.log('Error connecting to ' + process.env.DB_NAME + ' database.')
+  console.log(error)
+}
+
+// mongoose.connect(`mongodb://${DB_HOST}:${DB_PORT}/${DB_NAME}`)
+
+// mongoose.connection.once("connected", function() {
+//   console.log("Connected to database");
+// });
+
+// mongoose.connection.on('error',function (err) {
+//   console.log('Mongoose connection error: ' + err);
+// });
+
 
 // initialize express app
 let app = express();
@@ -37,10 +50,10 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.static(path.join(__dirname, "")));
 
 // body-parser middleware
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-app.use(fileUpload());
+// app.use(fileUpload());
 
 // express session middleware
 app.use(expressSession({
@@ -95,24 +108,10 @@ app.use('/orders', OrderRouter)
 
 app.use('/products', ProductRouter)
 
-
 app.use('/users', UserRouter)
 
-// app.use("/reports", dashboardRouter);
-
-// app.use ("/orders", orderRouter);
-
-// app.use("/products", productRouter);
-
-// app.use("/categories", categoryRouter);
-
-// app.use("/customers", customerRouter);
-
-// app.use("/store-settings", storeRouter);
-
-// app.use("/notifications", notificationRouter);
 
 // listen to port
-app.listen(PORT, function() {
-   console.log(`${APP_NAME} server running on port ${PORT}`);
+app.listen(port.env.PORT, function() {
+   console.log(`${APP_NAME} server running on port ${port.env.PORT}`);
 });
