@@ -87,7 +87,7 @@ class ShopController {
       await OrderService.save(order_dao)
       await CartService.clearCart(req.session.customer._id)
       req.flash('success_msg', 'Order successfully placed')
-      res.redirect('/shop')
+      res.redirect('/shop/orders')
     } catch (error) {
       console.log(error)
       req.flash('error_msg', 'Failed to add item to cart')
