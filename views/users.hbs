@@ -1,0 +1,112 @@
+  <div class="col-12 py-4">
+    <div class="d-flex justify-content-between">
+      <h2>Users</h2>
+      <div>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#createUser">Add New Admin User</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12">
+    {{#if error_msg}}
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>{{error_msg}}</strong> 
+      </div>
+      <script>
+        $(".alert").alert();
+      </script>
+    {{/if}}
+  </div>
+
+  <div class="col-12 py-4">
+    <form class="form-inline" method="GET" action="/users">
+      <div class="form-group py-2">
+        <input class="form-control" name="search" placeholder="Search by name...">
+        <button type="submit" class="btn btn-sm btn-primary">Search</button>
+      </div>
+    </form>
+    <h4 class="mb-0 bg-info py-2 text-white text-center mt-4">List of Admin. Users</h4>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Role</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each users}}
+        <tr>
+          <td>{{this.email}}</td>
+          <td>{{this.first_name}}</td>
+          <td>{{this.last_name}}</td>
+          <td>{{this.role}}</td>
+          <td>
+            <a class="btn btn-danger btn-sm text-white" href="/users/remove/" + {{this._id}}>Remove</a>
+        </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="createUser" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Create New Admin User</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-12">
+                <form method="POST" action="/users/new" class="row">
+                  <div class="form-group col-12">
+                    <label>Email</label>
+                    <input type="email" name="email" class="form-control" required>
+                  </div>
+                  <div class="form-group col-6">
+                    <label>First Name</label>
+                    <input type="text" name="first_name" class="form-control" required>
+                  </div><div class="form-group col-6">
+                    <label>Last Name</label>
+                    <input type="text" name="last_name" class="form-control" required>
+                  </div>
+                  <div class="form-group col-6">
+                    <label>Password</label>
+                    <input type="password" name="password" class="form-control" required>
+                  </div>
+                  <div class="form-group col-6">
+                    <label>Retype Password</label>
+                    <input type="password" name="retype_password" class="form-control" required>
+                  </div>
+                  <div class="form-group col-12">
+                    <button type="submit" class="btn btn-primary btn-block">Create User</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $('#exampleModal').on('show.bs.modal', event => {
+    var button = $(event.relatedTarget);
+    var modal = $(this);
+    // Use above variables to manipulate the DOM
+    
+  });
+</script>

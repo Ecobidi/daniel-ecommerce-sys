@@ -1,0 +1,123 @@
+<div class="row mb-3 bg-light">
+  <div class="col-lg-3 col-md-6 col-sm-6 mb-2">
+    <a href="/orders" class="text-white top-detail bg-info">
+      <div class="display-image"><i class="b-icon b-icon-1 fa fa-first-order" aria-hidden="true"></i> </div>
+      <div>
+        <h6>Orders</h6>
+        <p class="total-count-label">{{ orders_count }}</p>
+      </div>
+    </a>
+  </div>
+  <div class="col-lg-3 col-md-6 col-sm-6 mb-2">
+    <a href="/categories" class="text-white top-detail bg-primary">
+      <div class="display-image"><i class="b-icon b-icon-2 fa fa-shopping-basket" aria-hidden="true"></i> </div>
+      <div>
+        <h6>Categories</h6>
+        <p class="total-count-label">{{ categories_count }}</p>
+      </div>
+    </a>
+  </div>
+  <div class="col-lg-3 col-md-6 col-sm-6 mb-2">
+    <a href="/products" class="text-white top-detail bg-success">
+      <div class="display-image"><i class="b-icon b-icon-3 fa fa-cart-plus" aria-hidden="true"></i> </div>
+      <div>
+        <h6>Products</h6>
+        <p class="total-count-label">{{ products_count }}</p>
+      </div>
+    </a>
+  </div>
+  <div class="col-lg-3 col-md-6 col-sm-6 mb-2">
+    <a href="/customers" class="text-white top-detail bg-danger">
+      <div class="display-image"><i class="b-icon b-icon-4 fa fa-users" aria-hidden="true"></i> </div>
+      <div>
+        <h6>Customers</h6>
+        <p class="total-count-label">{{ customers_count }}</p>
+      </div>
+    </a>
+  </div>
+</div>
+
+</div>
+{{!-- <div class="row side-drop-shadow">
+  <div class="col-lg-12 col-md-12 col-sm-12 text-center py-4 mb-3">
+    <div class="row store-stats">
+      <div class="col-lg-3 col-md-4 col-sm-4 mb-2">
+        <h6 class="lead">$103.3</h6>
+        <p>Total Revenue</p>                    
+      </div>
+      <div class="col-lg-3 col-md-4 col-sm-4 mb-2">
+        <h6 class="lead">10</h6>
+        <p>Orders In Processing</p>                    
+      </div>
+      <div class="col-lg-3 col-md-4 col-sm-4 mb-2">
+        <h6 class="lead">1</h6>
+        <p>Orders Completed</p>                    
+      </div>
+      <div class="col-lg-3 col-md-4 col-sm-4 mb-2">
+        <h6 class="lead">0</h6>
+        <p>Orders Cancelled</p>                    
+      </div>
+    </div>
+  </div>
+</div> --}}
+
+<div class="row pt-4">
+  <div class="col-md-8">
+    <h6 class="bg-info text-center py-2 mb-0 text-center text-white">Recent Orders</h6>
+    <table class="table table-light">
+      {{#if recentOrders}}
+      <thead>
+        <tr>
+          <th>Customer</th>
+          <th>D. Address</th>
+          <th>Date Ordered</th>
+          <th>Status</th>
+        </tr>
+      </thead>        
+      <tbody>
+        {{#each recentOrders}}
+        <tr>
+          <td><small>{{this.customer_name}}</small></td>
+          <td><small>{{this.delivery_address}}</small></td>
+          <td><small>{{this.date_of_order}}</small></td>
+          <td><span class="bg-info text-white badge badge-pill p-2">{{this.delivery_status}}</span></td>
+        </tr>
+        {{/each}}
+      </tbody>
+      {{else}}
+      <div class="jumbotron bg-default text-center py-4">
+        <h6 class="lead mb-4 text-dark font-weight-bold">No Orders</h6>
+      </div>
+      {{/if}}
+    </table>
+  </div>
+
+  <div class="col-md-4">
+    <h6 class="bg-info text-center text-white py-2 mb-0">Recently Added Products</h6>
+    {{#if recentProducts}}
+    {{#each recentProducts}}
+    <div class="product-list-item py-2">
+      <div class="product-image mr-2">
+        {{#if this.image}}
+        <img class="img-fluid" src="/uploads/products/{{this.image}}" alt="picture">
+        {{/if}}
+      </div>
+      <div class="flex">  
+        <div>
+          <strong class="text-primary">{{this.name}}</strong> <br>
+          <span>In Stock: {{this.quantity}}</span>
+        </div>
+        <div class="mt-1">
+          <strong class="badge badge-pill badge-info p-2 number-style">&#8358;{{this.price}}</strong>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+    {{else}}
+    <div class="jumbotron bg-default text-center py-4">
+      <h6 class="lead mb-4 text-dark">No Products</h6>
+      <a href="/products/new" class="btn btn-outline-dark">Proceed To Add Product</a>
+    </div>
+    {{/if}}
+  </div>
+</div>

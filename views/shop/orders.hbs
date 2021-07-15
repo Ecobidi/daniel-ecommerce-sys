@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="col-12 jumbotron">
+    <h2 class="text-center">My Orders</h2>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Delivery Address</th>
+              <th>Products</th>
+              <th>Method of Payment</th>
+              <th>Card Number</th>
+              <th>Date Ordered</th>
+              <th>Status</th>
+            </tr>
+          </thead>        
+          <tbody>
+            {{#each orders}}
+            <tr>
+              <td><small>{{this.delivery_address}}</small></td>
+              <td>
+                {{#each this.products}}
+                <small class="d-block font-weight-bold">{{this.qty}} {{this.name}}</small>
+                {{/each}}
+              </td>
+              <td><small>{{this.payment_type}}</small></td>
+              <td><small>{{this.card_num}}</small></td>
+              <td><small>{{this.date_of_order}}</small></td>
+              <td>
+                <span class="bg-warning badge badge-pill p-2">{{this.delivery_status}}</span>
+              </td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
+</div>

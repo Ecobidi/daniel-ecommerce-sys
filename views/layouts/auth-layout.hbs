@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width initial-scale=1.0">
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+      <div class="container-fluid">
+        <div class="w-100 d-flex justify-content-between align-items-center">
+          <div class="mx-auto">
+            <a class="navbar-brand mr-4" style="font-size: 24px;" href="/"><i class="fa fa-opencart" ></i> {{ appname }} </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid main-content">
+      <div class="row clearfix">
+        <div class="col-12 bg-light main-dashboard">
+          <div class="container-fluid">
+            {{{body}}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="/lib/js/jquery.min.js"></script>
+    <!-- bootstrap.bundle.min.js includes both bootstrap.js and popper.js -->
+    <script type="text/javascript" src="/lib/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

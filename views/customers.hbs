@@ -1,0 +1,38 @@
+  <div class="col-12 py-4">
+    <div class="d-flex justify-content-between">
+      <h2>Customers</h2>
+    </div>
+  </div>
+
+  <div class="col-12 py-4">
+    <form class="form-inline" method="POST" action="/customers">
+      <div class="form-group py-2">
+        <input class="form-control" name="search">
+        <button type="submit" class="btn btn-sm btn-primary">Search</button>
+      </div>
+    </form>
+    <h4 class="mb-0 bg-info py-2 text-white text-center mt-4">Registered Customers</h4>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each customers}}
+        <tr>
+          <td>{{this.email}}</td>
+          <td>{{this.first_name}}</td>
+          <td>{{this.last_name}}</td>
+          <td>
+            <a class="btn btn-danger btn-sm text-white" href="/customers/remove/" + {{this._id}}>Remove</a>
+        </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>

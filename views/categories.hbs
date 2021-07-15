@@ -1,0 +1,87 @@
+<div class="row">
+  {{#if error_msg}}
+  <div class="col-12 py-2 bg-danger">{{error_msg}}</div>
+  {{/if}}
+  {{#if success_msg}}
+  <div class="col-12 py-2 bg-success">{{success_msg}}</div>
+  {{/if}}
+
+  <div class="col-12 py-4">
+    <div class="d-flex justify-content-between">
+      <h2>Category</h2>
+      <div>
+        <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#add-category">Add Category</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 py-4">
+    <form class="form-inline" method="POST" action="/categories">
+      <div class="form-group py-2">
+        <input class="form-control" type="search" name="name">
+        <button type="submit" class="btn btn-sm btn-primary">Search</button>
+      </div>
+    </form>
+    <h4 class="mb-0 bg-info py-2 text-white text-center mt-4">List of Product Categories</h4>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each categories}}
+        <tr>
+          <td>{{this.name}}</td>
+          <td>
+            <a href="/categories/remove/{{this._id}}" class="btn btn-danger btn-sm">Remove</a>
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{{! Add new Category Modal}}
+<div id="add-category" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="my-modal-title">Add New Category</h5>
+        <button class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="POST" action="/categories/new">
+          <div class="form-group"> 
+            <label class="d-block">Category Name</label>
+            <input type="text" name="name" class="form-control" placeholder="Enter Category Name" required="required" >
+          </div>
+          <div class="form-group text-right">
+            <button type="submit" class="btn btn-success">Add Category</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const categoryImageDirectory = "/uploads/category/photo/";
+  let nameBox = document.getElementById("nameBox");
+  let hiddenIdField = document.getElementById("hidden-id-field");
+  let categoryImage = document.getElementById("categoryImage");
+  let editCategories = document.getElementsByClassName("edit-category");
+
+  for (let i = 0, len = editCategories.length; i < len; i++) {
+    editCategories[i].addEventListener("click", (e) => {
+      let dataset = e.target.dataset;
+      hiddenIdField.value = dataset.id
+      nameBox.value = dataset.name;
+      categoryImage.src = categoryImageDirectory + dataset.image;
+    });
+  }
+</script>

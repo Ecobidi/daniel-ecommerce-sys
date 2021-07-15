@@ -1,0 +1,116 @@
+<div class="row">
+  <div class="col-12 jumbotron">
+    <h2 class="text-center">Shopping Cart</h2>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Product</th>
+              <th>Price</th>
+              <th>Availability</th>
+              <th>Quantity</th>
+              <th>Total</th>
+              <th class="text-right">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#unless cart.products.length}}
+            <tr>
+              <td colspan="7" class="jumbotron bg-default text-center">
+                <div class="py-4">
+                  <h6 class="lead mb-4 text-dark">Cart is empty</h6>
+                  <a href="/shop" class="btn btn-outline-dark">Continue Shopping</a>
+                </div>
+              </td>
+            </tr>
+            {{/unless}}
+            {{#each cart.products}}
+              <tr>
+                <td>
+                  <img class="mini-square-thumbnail" src="/uploads/products/{{this.image}}" alt="{{this.name}}">
+                </td>
+                <td>{{this.name}}</td>
+                <td>&#8358; {{this.price}}</td>
+                <td>
+                  {{#if this.in_stock}} In-stock
+                  {{else}} Out-of-stock
+                  {{/if}}
+                </td>
+                <td>
+                  <form action="/shop/cart/add" method="GET" class="form-inline" id="{{this._id}}">
+                  <input required type="hidden" name="product_id" value="{{this._id}}">
+                  <input required type="number" min="1" name="cart_item_qty" value="{{this.cartQty}}" class="form-control mx-2">
+                  </form>
+                </td>
+                <td>&#8358; {{this.total}}</td>
+                <td>
+                  <a href="/shop/cart/remove?product_id={{this._id}}" class="btn btn-sm btn-danger px-2 pull-right"> <i class="fa fa-times" aria-hidden="true"></i> </a>
+                </td>
+              </tr>
+            {{/each}}
+            {{#if cart.products.length}}
+            <tr>
+              <td colspan="6" class="text-right text-primary">
+                <strong>Total: &#8358; {{cart.totalPrice}}</strong> 
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td colspan="6">
+                <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#checkoutId">Checkout</button>
+              </td>
+              <td></td>
+            </tr>
+            {{/if}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+<!-- Checkout Modal -->
+<div class="modal fade" id="checkoutId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Checkout</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+      <div class="modal-body">
+        <form action="/shop/checkout" class="row" method="POST">
+          <div class="form-group col-12">
+            <input type="text" class="form-control" disabled value="{{customer_name}}">
+          </div>
+          <div class="form-group col-12">
+            <input required type="text" class="form-control" name="contact_phone" placeholder="Mobile phone number...">
+          </div>
+          <div class="form-group col-12">
+            <input required type="text" class="form-control" name="delivery_address" placeholder="Delivery address...">
+          </div>
+          <div class="text-danger col-12">
+            <i class="fa fa-cc-mastercard" aria-hidden="true"></i> 
+            <i class="fa fa-cc-stripe" aria-hidden="true"></i> 
+            <i class="fa fa-cc-visa" aria-hidden="true"></i> 
+          </div>
+          <div class="form-group col-9">
+            <input required type="number" class="form-control" name="card_num" placeholder="Card number">
+          </div>
+          <div class="form-group col-3">
+            <input required type="number" class="form-control" name="card_cvv" placeholder="Card CVV">
+          </div>
+          <div class="form-group col-12 mt-2">
+            <input type="submit" class="btn btn-primary form-control" value="Proceed To Make Payment">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

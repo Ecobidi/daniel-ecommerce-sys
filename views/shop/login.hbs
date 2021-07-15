@@ -1,0 +1,31 @@
+<div class="row mx-0 ">
+  <div class="col-lg-5 mx-auto py-4">
+    <div class="p-4 bg-white">
+      <h5>Already a member?</h5>
+      <h6 class="font-weight-light">Sign in</h6>
+      <div>
+        {{#if error_msg}}
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>{{error_msg}}</strong> 
+          </div>
+          <script>
+            $(".alert").alert();
+          </script>
+        {{/if}}
+      </div>
+      <form action="/shop/login" method="POST" class="pt-3">
+        <div class="form-group"><input required type="email" name="email" placeholder="Email" class="form-control form-control-lg"></div>
+        <div class="form-group"><input required type="password" name="password" placeholder="Password" class="form-control form-control-lg"></div>
+        <div class="my-3">
+          <button class="btn btn-block btn-primary" type="submit">SIGN IN</button>
+        </div>
+        <div class="text-center mt-4 font-weight-light">
+          Don't have an account? <a href="/shop/register" class="text-primary">Create</a>
+        </div>
+      </form>
+    </div>
+  </div>			
+</div>

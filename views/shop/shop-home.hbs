@@ -1,0 +1,38 @@
+<div class="row py-4">
+  <div class="col-lg-3">
+    <div class="list-group">
+      <h4 class="list-group-item list-group-item-action active font-weight-bold mb-4 py-4">Categories</h4>
+      <a href="/shop" class="list-group-item list-group-item-action text-primary py-2" style="border: none; background: transparent"><strong>All Categories</strong></a>
+      {{#each categories}}
+        <a href="/shop?category={{this.name}}" class="list-group-item list-group-item-action text-primary py-2" style="border: none; background: transparent"><strong>{{this.name}}</strong></a>
+      {{/each}}
+    </div>
+  </div>
+
+  <div class="col-lg-9">
+    <div class="row">
+      <div class="col-12">
+        <div class="jumbotron py-4">
+          <h4>{{products.length}} Product(s) Found</h4>
+        </div>
+      </div>
+      {{#each products}}
+        <div class="col-4">
+          <div class="shop-product-list-item p-2 d-block">
+            <div class="shop-product-list-item-image">
+              <img src="/uploads/products/{{this.image}}" alt="{{this.name}}">
+            </div>
+            <div class="shop-product-list-item-details">
+              <p class="shop-product-list-item-name">{{this.name}}</p>
+              <p class="shop-product-list-item-price">&#8358; {{this.price}}</p>
+              <div class="mt-2">
+                <a href="/shop/cart/add?product_id={{this._id}}&cart_item_qty=1" class="btn-block btn btn-primary">Add to cart</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      {{/each}}
+
+    </div>
+  </div>
+</div>

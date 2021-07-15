@@ -1,0 +1,53 @@
+<div class="container-fluid">
+  <div class="row py-4">
+    <div class="col-12">
+      <h2>Add New Product</h2>
+      <hr>
+      <br>
+    </div>
+    <div class="col-12 mx-md-auto">
+      <form method="POST" action="/products/new" enctype="multipart/form-data" class="row">
+        <div class="form-group col-6">
+          <label>Product Name:</label>
+          <input required type="text" name="name" class="form-control">
+        </div>
+        <div class="form-group col-6">
+          <label>Product Description:</label>
+          <textarea required name="description" class="form-control">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo, inventore</textarea>
+        </div>
+        <div class="form-group col-3">
+          <label>Quantity: </label>
+          <input required type="number" name="quantity" class="form-control">
+        </div>
+        <div class="form-group col-3">
+          <label>Product Price: </label>
+          <input required type="number" name="price" class="form-control">
+        </div>
+        <div class="form-group col-3">
+          <label>Color (Optional): </label>
+          <input type="text" name="color" class="form-control">
+        </div>      
+        <div class="form-group col-3">
+          <label>Size: (Optional) </label>
+          <input name="size" class="form-control">
+        </div>
+        <hr>
+        <br>
+        <div class="form-group col-12">
+          <label>Select Category:</label> <br>
+          {{#each categories}}
+          <label class="mr-2"><input type="radio" name="category" value="{{this.name}}"> <span class="font-weight-bold">{{this.name}}</span></label>
+          {{/each}}
+        </div>
+        <div class="form-group col-6">
+          <label>Product Image:</label>
+          <input type="file" name="image" class="form-control" accept=".jpg, .png, .jpeg, .gif">
+          <span>Accepts only PNG, JPG, JPEG, GIF image formats.</span>
+        </div>
+        <div class="form-group col-4 offset-4 d-flex justify-content-center py-2">
+          <button type="submit" class="btn btn-primary btn-lg btn-block">Proceed</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

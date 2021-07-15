@@ -1,0 +1,53 @@
+  <div class="col-12 py-4">
+    <div class="d-flex justify-content-between">
+      <h2>Orders</h2>
+    </div>
+  </div>
+
+  <div class="col-12 py-4">
+    <form class="form-inline" method="POST" action="/orders">
+      <div class="form-group py-2">
+        <input class="form-control" name="search">
+        <button type="submit" class="btn btn-sm btn-primary">Search</button>
+      </div>
+    </form>
+    <h4 class="mb-0 bg-info py-2 text-white text-center mt-4">List of Orders</h4>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Customer</th>
+          <th>Products</th>
+          <th>D. Address</th>
+          <th><small class="font-weight-bold">Mode of Payment</small></th>
+          <th>Date Ordered</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>        
+      <tbody>
+        {{#each orders}}
+        <tr>
+          <td>
+            <small class="font-weight-bold d-block">{{this.customer_name}}</small>
+            <small class="font-weight-bold">({{this.customer.email}})</small>
+          </td>
+          <td>
+            {{#each this.products}}
+            <small class="d-block font-weight-bold">{{this.qty}} {{this.name}}</small>
+            {{/each}}
+          </td>
+          <td><small>{{this.delivery_address}}</small></td>
+          <td><small>{{this.payment_type}}</small></td>
+          <td><small>{{this.date_of_order}}</small></td>
+          <td>
+            <span class="bg-warning badge badge-pill p-2">{{this.delivery_status}}</span></td>
+          <td>
+            <a href="/orders/confirm?order_id={{this._id}}" class="btn btn-sm btn-success d-block my-1 text-white">Confirm</a>
+            <a href="/orders/cancel?order_id={{this._id}}" class="btn btn-sm btn-warning d-block my-1 text-white">Cancel</a>
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>
