@@ -17,7 +17,7 @@ class CustomerController {
   }
 
   static async createCustomer(req, res) {
-    if (req.password != req.retype_password) {
+    if (req.password != res.retype_password) {
       req.flash('error_msg', 'Passwords Do Not Match!')
       return res.redirect('/customers/new')
     }
@@ -36,7 +36,7 @@ class CustomerController {
     try {
       await CustomerService.removeOne(req.params.customer_id)
       req.flash('success_msg', 'Category Successfully Removed')
-      req.redirect('/customers')
+      res.redirect('/customers')
     } catch (error) {
       console.log(error)
       req.flash('error_msg', 'An Error Occurred')

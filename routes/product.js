@@ -4,6 +4,7 @@ const streamifier = require('streamifier')
 const router = require('express').Router()
 
 const ProductController = require('../controllers/product')
+const ProductService = require('../services/product')
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -18,8 +19,6 @@ const streamUpload = (file) => {
     
       let stream = cloudinary.v2.uploader.upload_stream({folder: 'ariaria-ecommerce-sys'},
         (error, result) => {
-          console.log('Error', error)
-          console.log('Result', result)
           if (result) {
             resolve(result);
           } else {
@@ -37,12 +36,12 @@ router.get('/new', ProductController.createProductPage)
 
 router.post('/new', upload.single('image'), async function (req, res, next) {
   try {
-    let {url} = await streamUpload('req.file.image')
+    let {url} = await streamUpload(req.file)
     let dao = req.body
     dao.image = url
     await ProductService.save(dao)
     req.flash('success_msg', 'Product Added')
-    req.redirect('/products')
+    res.redirect('/products')
   } catch (error) {
     console.log(error)
     console.log('An Error Creating Product')

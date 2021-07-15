@@ -21,7 +21,7 @@
           <th>Image</th>
           <th>Product Name</th>
           <th>Category</th>
-          <th>Price</th>
+          <th class="text-right">Price (&#8358;)</th>
           <th>Quantity</th>
           <th>Action</th>
         </tr>
@@ -34,13 +34,13 @@
           {{/if}}
           <td>{{this.name}}</td>
           <td>{{this.category}}</td>
-          <td>{{this.price}}</td>
+          <td class="text-right">{{this.price}}</td>
           <td>{{this.quantity}}</td>
           <td>
             <div class="btn-group" role="group" aria-label="Button group">
               {{!-- <a href="" class="btn btn-info btn-sm"> <i class="fa fa-binoculars"></i> </a>
               <a href="/products/edit?_id={{this._id}}" class="btn btn-warning btn-sm"> <i class="fa fa-edit"></i> </a> --}}
-              <a class="btn btn-danger btn-sm text-white" href="/products/remove/" + {{this._id}}>Remove</a>
+              <a class="btn btn-danger btn-sm text-white" href="/products/remove/{{this._id}}" >Remove</a>
             </div>
           </td>
         </tr>

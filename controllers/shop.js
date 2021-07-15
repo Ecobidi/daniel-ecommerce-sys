@@ -59,7 +59,7 @@ class ShopController {
     } catch (error) {
       console.log(error)
       req.flash('error_msg', 'Failed to add item to cart')
-      req.redirect('/shop/cart')
+      res.redirect('/shop/cart')
     }
   }
 
@@ -73,7 +73,7 @@ class ShopController {
     } catch (error) {
       console.log(error)
       req.flash('error_msg', 'Failed to remove item from cart')
-      req.redirect('/shop/cart')
+      res.redirect('/shop/cart')
     }
   }
 
@@ -91,7 +91,7 @@ class ShopController {
     } catch (error) {
       console.log(error)
       req.flash('error_msg', 'Failed to add item to cart')
-      req.redirect('/shop/cart')
+      res.redirect('/shop/cart')
     }
   }
 

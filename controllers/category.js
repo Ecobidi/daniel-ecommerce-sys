@@ -28,7 +28,7 @@ class CategoryController {
     try {
       await CategoryService.removeOne(req.params.category_id)
       req.flash('success_msg', 'Category Successfully Removed')
-      req.redirect('/categories')
+      res.redirect('/categories')
     } catch (error) {
       console.log(error)
       req.flash('error_msg', 'An Error Occurred')

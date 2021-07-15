@@ -37,7 +37,7 @@ class UserController {
     try {
       await UserService.removeOne(req.params.user_id)
       req.flash('success_msg', 'User Successfully Removed')
-      req.redirect('/users')
+      res.redirect('/users')
     } catch (error) {
       console.log(error)
       req.flash('error_msg', 'An Error Occurred')
