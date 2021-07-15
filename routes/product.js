@@ -35,7 +35,7 @@ router.get('/', ProductController.getAllProductsPage)
 
 router.get('/new', ProductController.createProductPage)
 
-router.post('/new', upload.fields(fields), async function (req, res, next) {
+router.post('/new', upload.single('image'), async function (req, res, next) {
   try {
     let {url} = await streamUpload('req.file.image')
     let dao = req.body

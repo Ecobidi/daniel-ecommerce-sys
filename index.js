@@ -9,7 +9,7 @@ let expressSession = require("express-session");
 let connectFlash = require("connect-flash");
 let fileUpload = require("express-fileupload");
 
-let apiRouter = require("./routes/api/index");
+// let apiRouter = require("./routes/api/index");
 let dashboardRouter = require("./routes/dashboard");
 
 const { CategoryRouter, CustomerRouter, ProductRouter, OrderRouter, ShopRouter, LoginRouter, UserRouter } = require('./routes')
@@ -18,7 +18,7 @@ let { APP_NAME, DB_HOST, DB_NAME, DB_PORT, PORT } = require("./config");
 
 // create db connection
 
-const uri = `mongodb+srv://${process.env.DB_USER}:<${process.env.DB_PASSWORD}>@cluster0.qmunc.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.qmunc.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`
 
 try {
   mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -98,7 +98,7 @@ app.get('/logout', (req, res) => {
 
 app.get("/", dashboardRouter);
 
-app.use("/api", apiRouter);
+// app.use("/api", apiRouter);
 
 app.use('/categories', CategoryRouter)
 
@@ -112,6 +112,6 @@ app.use('/users', UserRouter)
 
 
 // listen to port
-app.listen(port.env.PORT, function() {
-   console.log(`${APP_NAME} server running on port ${port.env.PORT}`);
+app.listen(process.env.PORT, function() {
+   console.log(`${APP_NAME} server running on port ${process.env.PORT}`);
 });
