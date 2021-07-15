@@ -81,14 +81,14 @@ app.use('/shop', ShopRouter)
 
 app.use('/login', LoginRouter)
 
-app.use('/', (req, res, next) => {
-  // for authenticating login
-  if (req.session.user && req.session.loggedIn) {
-    next()
-  } else {
-    res.redirect('/login')
-  }
-})
+// app.use('/', (req, res, next) => {
+//   // for authenticating login
+//   if (req.session.user && req.session.loggedIn) {
+//     next()
+//   } else {
+//     res.redirect('/login')
+//   }
+// })
 
 app.get('/logout', (req, res) => {
   req.session.loggedIn = false
