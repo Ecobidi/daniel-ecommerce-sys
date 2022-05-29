@@ -1,6 +1,6 @@
 module.exports = {
   'PORT': 4444,
-  'APP_NAME': 'Ariaria Ecommerce System',
+  'APP_NAME': 'Ecommerce System',
   'DOMAIN': 'http://localhost',
   'DB_HOST': 'localhost',
   'DB_NAME': 'suits-ecommerce',
